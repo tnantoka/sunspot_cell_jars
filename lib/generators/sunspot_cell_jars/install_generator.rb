@@ -10,32 +10,7 @@ module SunspotCellJars
 
           Dir.mkdir("solr/lib") unless File.exists?("solr/lib")
 
-          files = %w{apache-mime4j-core-0.7.jar
-            apache-mime4j-dom-0.7.jar
-            apache-solr-cell-3.5-SNAPSHOT.jar
-            asm-3.1.jar
-            bcmail-jdk15-1.45.jar
-            bcprov-jdk15-1.45.jar
-            boilerpipe-1.1.0.jar
-            commons-compress-1.2.jar
-            dom4j-1.6.1.jar
-            fontbox-1.6.0.jar
-            icu4j-4_8_1_1.jar
-            jempbox-1.6.0.jar
-            metadata-extractor-2.4.0-beta-1.jar
-            netcdf-4.2-min.jar
-            pdfbox-1.6.0.jar
-            poi-3.8-beta4.jar
-            poi-ooxml-3.8-beta4.jar
-            poi-ooxml-schemas-3.8-beta4.jar
-            poi-scratchpad-3.8-beta4.jar
-            rome-0.9.jar
-            tagsoup-1.2.1.jar
-            tika-core-0.10.jar
-            tika-parsers-0.10.jar
-            xercesImpl-2.8.1.jar
-            xml-apis-1.0.b2.jar
-            xmlbeans-2.3.0.jar}
+          files = Dir.glob(File.dirname(__FILE__) + "/templates/*.jar").map { |f| File.basename(f) }
 
           files.each do |file|
             copy_file file, "solr/lib/#{file}"
